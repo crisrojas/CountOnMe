@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="isI-Gg-Iye">
-                                <rect key="frame" x="20" y="413.5" width="374" height="358.5"/>
+                                <rect key="frame" x="20" y="413.5" width="374" height="277.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U2a-5D-kgc">
                                         <rect key="frame" x="0.0" y="0.0" width="102" height="152"/>
@@ -189,7 +189,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="tappedSubstractionButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="4QY-vh-96i"/>
+                                            <action selector="tappedMultiplicationButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="loH-Zy-MLU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0T-XJ-Njs">
@@ -200,7 +200,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="tappedSubstractionButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="QDt-oO-k3g"/>
+                                            <action selector="tappedDivisionButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="kd6-5r-vIg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMj-Of-bCU">
@@ -223,7 +223,7 @@
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="height" secondItem="eIh-hr-C95" secondAttribute="height" multiplier="0.39" id="3fw-uo-jA3"/>
                             <constraint firstItem="4f6-XY-6fG" firstAttribute="trailing" secondItem="ogr-Aw-e1h" secondAttribute="trailing" constant="20" id="8IJ-OS-aQU"/>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="4f6-XY-6fG" secondAttribute="leading" constant="20" id="Pb5-5z-T5y"/>
-                            <constraint firstItem="isI-Gg-Iye" firstAttribute="height" secondItem="eIh-hr-C95" secondAttribute="height" multiplier="0.4" id="RTG-17-xOj"/>
+                            <constraint firstItem="isI-Gg-Iye" firstAttribute="height" secondItem="eIh-hr-C95" secondAttribute="height" multiplier="0.31" id="RTG-17-xOj"/>
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="4f6-XY-6fG" secondAttribute="top" id="SGO-RG-VcA"/>
                             <constraint firstItem="ogr-Aw-e1h" firstAttribute="leading" secondItem="4f6-XY-6fG" secondAttribute="leading" constant="20" id="YYf-AY-YwN"/>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="top" secondItem="T2H-yn-nBB" secondAttribute="bottom" constant="20" id="cOO-CZ-6fx"/>
