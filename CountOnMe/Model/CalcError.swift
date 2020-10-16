@@ -8,9 +8,9 @@
 
 import Foundation
 
-/// Constant strings used in the app
+/// Constant error strings used in the app
 
-enum Error {
+enum CalcError: Error {
     case incorrectExpression
     case notEnoughElements
     case moreThanOneOperator

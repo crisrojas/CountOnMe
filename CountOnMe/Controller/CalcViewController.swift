@@ -9,12 +9,14 @@
 /* todo:
  - nombre entier sans entier (number formatteur)
  - division par 0 et d'autres scénarios
- - ✅ model (manipulation): symbols/opérateurs dans un enuma
+ - ✅ model (manipulation): symbols/opérateurs dans un enum
+ rajouter egale dans enum
+ - utiliser un guard (tap Equal)
  */
 
 import UIKit
 
-class ViewController: UIViewController, SimpleCalcView {
+class CalcViewController: UIViewController, SimpleCalcView {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
@@ -46,7 +48,7 @@ class ViewController: UIViewController, SimpleCalcView {
     }
     
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        simpleCalc.tapEqual(sender: sender)
+        simpleCalc.tapEqual()
     }
 }
 

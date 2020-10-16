@@ -10,5 +10,4 @@ import UIKit
 
 protocol SimpleCalcView: UIViewController {
     var textView: UITextView! { get set }
-    var numberButtons: [UIButton]! { get set }
 }
