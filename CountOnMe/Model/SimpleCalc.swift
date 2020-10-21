@@ -31,7 +31,6 @@ class SimpleCalc {
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-        
         /// Clears the textView if its content have a result (tappedEqualButton)
         if expressionHaveResult {
             view.textView.text = ""

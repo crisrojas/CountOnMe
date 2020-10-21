@@ -30,10 +30,10 @@ class Calculator {
             return .failure(CalcError.notEnoughElements)
         }
         
-        // Create local copy of operations
+        /// Create local copy of operations
         var operationsToReduce = elements
         
-        // Iterate over operations while an operand still here
+        /// Iterate over operations while an operand still here
         while operationsToReduce.count > 1 {
             let left = Float(operationsToReduce[0])!
             let operand = operationsToReduce[1]
