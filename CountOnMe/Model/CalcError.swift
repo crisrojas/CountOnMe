@@ -6,11 +6,8 @@
 //  Copyright © 2020 Vincent Saluzzo. All rights reserved.
 //
 
-import Foundation
-
-/// Constant error strings used in the app
-
 enum CalcError: Error {
+    
     case incorrectExpression
     case notEnoughElements
     case moreThanOneOperator

@@ -6,26 +6,24 @@
 //  Copyright © 2020 Vincent Saluzzo. All rights reserved.
 //
 
-import Foundation
-
 enum Operands {
-    case plus
-    case less
-    case multiply
-    case divide
-    case equal
+    case addition
+    case substraction
+    case multiplication
+    case division
+    case compute
     
     var symbol: String {
         switch self {
-        case .plus:
+        case .addition:
             return "+"
-        case .less:
+        case .substraction:
             return "-"
-        case .multiply:
+        case .multiplication:
             return "x"
-        case .divide:
+        case .division:
             return "÷"
-        case .equal:
+        case .compute:
             return "="
         }
     }

@@ -6,15 +6,13 @@
 //  Copyright © 2020 Vincent Saluzzo. All rights reserved.
 //
 
-import Foundation
-
 class Calculator {
     
     func expressionIsCorrect(elements: [String]) -> Bool {
-        return elements.last != Operands.plus.symbol
-            && elements.last != Operands.less.symbol
-            && elements.last != Operands.multiply.symbol
-            && elements.last != Operands.divide.symbol
+        return elements.last != Operands.addition.symbol
+            && elements.last != Operands.substraction.symbol
+            && elements.last != Operands.multiplication.symbol
+            && elements.last != Operands.division.symbol
     }
     
     func expressionHaveEnoughElement(elements: [String]) -> Bool {
@@ -35,28 +33,54 @@ class Calculator {
         
         /// Iterate over operations while an operand still here
         while operationsToReduce.count > 1 {
-            let left = Float(operationsToReduce[0])!
-            let operand = operationsToReduce[1]
-            let right = Float(operationsToReduce[2])!
+            var result: Float
             
-            let result: Float
-            
-            switch operand {
-            case Operands.plus.symbol:
-                result = left + right
-            case Operands.less.symbol:
-                result = left - right
-            case Operands.multiply.symbol:
-                result = left * right
-            case Operands.divide.symbol:
-                result = left / right
-            default: fatalError(CalcError.unknownOperator.message)
+            /// Checks if array contains a priority operand (multiplication or division) and returns the index if true
+            let firstIndex = operationsToReduce.firstIndex { operand -> Bool in
+                operand == Operands.multiplication.symbol || operand == Operands.division.symbol
             }
-            
-            operationsToReduce = Array(operationsToReduce.dropFirst(3))
-            operationsToReduce.insert("\(result)", at: 0)
-        }
         
+            if let index = firstIndex {
+                
+                let left = Float(operationsToReduce[index - 1]) ?? 1
+                let operand = operationsToReduce[index]
+                let right = Float(operationsToReduce[index + 1]) ?? 1
+                
+                switch operand {
+                case Operands.multiplication.symbol:
+                    result = left * right
+                case Operands.division.symbol:
+                    result = left / right
+                default:
+                    fatalError(CalcError.unknownOperator.message)
+                }
+                
+                let array = [index + 1, index, index - 1]
+                for i in array {
+                    operationsToReduce.remove(at: i)
+                }
+                
+                operationsToReduce.insert(result.isInt ? "\(Int(result))" : "\(result)", at: index - 1)
+                
+            } else {
+                
+                let left = Float(operationsToReduce[0]) ?? 0
+                let operand = operationsToReduce[1]
+                let right = Float(operationsToReduce[2]) ?? 0
+                
+                switch operand {
+                case Operands.addition.symbol:
+                    result = left + right
+                case Operands.substraction.symbol:
+                    result = left - right
+                default:
+                    fatalError(CalcError.unknownOperator.message)
+                }
+                
+                operationsToReduce = Array(operationsToReduce.dropFirst(3))
+                operationsToReduce.insert(result.isInt ? "\(Int(result))" : "\(result)", at: 0)
+            }
+        }
         return .success(operationsToReduce.first ?? "")
     }
 }

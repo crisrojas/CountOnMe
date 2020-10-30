@@ -6,49 +6,89 @@
 //  Copyright © 2019 Vincent Saluzzo. All rights reserved.
 //
 
-/* todo:
- - nombre entier sans entier (number formatteur)
- - division par 0 et d'autres scénarios
- - ✅ model (manipulation): symbols/opérateurs dans un enum
- rajouter egale dans enum
- - utiliser un guard (tap Equal)
- */
-
 import UIKit
 
-class CalcViewController: UIViewController, SimpleCalcView {
+class CalcViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
-    lazy var simpleCalc = SimpleCalc(view: self)
+    let calculator = Calculator()
     
     override func viewDidLoad() { super.viewDidLoad() }
     
-    
     // View actions
+    @IBAction func tappedResetButton(_ sender: UIButton) {
+        textView.text = "0"
+    }
+    
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        simpleCalc.tapNumber(sender: sender)
+       tapNumber(sender: sender)
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        simpleCalc.executeCalc(with: Operands.plus)
+        executeCalc(with: Operands.addition)
     }
     
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        simpleCalc.executeCalc(with: Operands.less)
+        executeCalc(with: Operands.substraction)
     }
     
     @IBAction func tappedMultiplicationButton(_ sender: UIButton) {
-        simpleCalc.executeCalc(with: Operands.multiply)
+        executeCalc(with: Operands.multiplication)
     }
     
     @IBAction func tappedDivisionButton(_ sender: UIButton) {
-        simpleCalc.executeCalc(with: Operands.divide)
+        executeCalc(with: Operands.division)
     }
     
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        simpleCalc.tapEqual()
+        tapEqual()
+    }
+    
+}
+
+private extension CalcViewController {
+    
+    var elements: [String] {
+           return textView.text.split(separator: " ").map { "\($0)" }
+       }
+       
+       var expressionHaveResult: Bool {
+           return textView.text.firstIndex(of: "=") != nil
+       }
+       
+    
+    func tapNumber(sender: UIButton) {
+        guard let numberText = sender.title(for: .normal) else {
+            return
+        }
+        
+        /// Clears the textView if its content have a result (tappedEqualButton) or has been cleaned with the "AC" button (textView.text == 0)
+        if textView.text == "0" || expressionHaveResult {
+            textView.text = ""
+        }
+        
+        textView.text.append(numberText)
+    }
+    
+    func tapEqual() {
+        let result = calculator.compute(elements: elements)
+        
+        switch result {
+        case .failure(let error):
+            presentErrorAlert(with: error.title, and: error.message)
+        case .success(let success):
+            textView.text.append(" = \(success)")
+        }
+    }
+    
+    func executeCalc(with operand: Operands) {
+        if calculator.expressionIsCorrect(elements: elements) {
+            textView.text.append(" \(operand.symbol) ")
+        } else {
+            presentErrorAlert(with: CalcError.moreThanOneOperator.title, and: CalcError.moreThanOneOperator.message)
+        }
     }
 }
 
