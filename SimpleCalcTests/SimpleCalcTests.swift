@@ -95,4 +95,19 @@ class SimpleCalcTests: XCTestCase {
         let operation = calculator.compute(elements: ["1", Operands.addition.symbol, "1", Operands.multiplication.symbol, "2"])
         XCTAssertEqual(operation, .success("3"))
     }
+    
+    func testGivenOperationHasPriorityAndInvalidOperands_WhenCallingCompute_ThenWeShouldGetACalcError() {
+        let operation = calculator.compute(elements: ["1", Operands.multiplication.symbol, "1", "+", "1", "%", "1"])
+            XCTAssertEqual(operation, .failure(CalcError.unknownOperator))
+        
+    }
+    
+    func testGivenWhePassAnInvalidOperator_WhenCallingCompute_ThenWheShouldGetACalcError() {
+        let operation = calculator.compute(elements: ["1", "%", "1"])
+        XCTAssertEqual(operation, .failure(CalcError.unknownOperator))
+        
+    }
+    
 }
+
+

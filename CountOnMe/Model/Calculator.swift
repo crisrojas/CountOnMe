@@ -31,7 +31,7 @@ class Calculator {
         /// Create local copy of operations
         var operationsToReduce = elements
         
-        /// Iterate over operations while an operand still here
+        /// Iterate over operations while an operand still there
         while operationsToReduce.count > 1 {
             var result: Float
             
@@ -52,7 +52,7 @@ class Calculator {
                 case Operands.division.symbol:
                     result = left / right
                 default:
-                    fatalError(CalcError.unknownOperator.message)
+                    return .failure(CalcError.unknownOperator)
                 }
                 
                 let array = [index + 1, index, index - 1]
@@ -74,7 +74,7 @@ class Calculator {
                 case Operands.substraction.symbol:
                     result = left - right
                 default:
-                    fatalError(CalcError.unknownOperator.message)
+                    return .failure(CalcError.unknownOperator)
                 }
                 
                 operationsToReduce = Array(operationsToReduce.dropFirst(3))
