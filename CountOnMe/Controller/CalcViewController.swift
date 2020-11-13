@@ -19,11 +19,11 @@ class CalcViewController: UIViewController {
     
     // View actions
     @IBAction func tappedResetButton(_ sender: UIButton) {
-        textView.text = "0"
+        textView.text = calculator.reset()
     }
     
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-       tapNumber(sender: sender)
+        tapNumber(sender: sender)
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
@@ -49,17 +49,18 @@ class CalcViewController: UIViewController {
 }
 
 private extension CalcViewController {
-    
+   
     var elements: [String] {
-           return textView.text.split(separator: " ").map { "\($0)" }
-       }
-       
-       var expressionHaveResult: Bool {
-           return textView.text.firstIndex(of: "=") != nil
-       }
-       
+        return textView.text.split(separator: " ").map { "\($0)" }
+    }
+    
+    var expressionHaveResult: Bool {
+        return textView.text.firstIndex(of: "=") != nil
+    }
+    
     
     func tapNumber(sender: UIButton) {
+        /// Retrieves number
         guard let numberText = sender.title(for: .normal) else {
             return
         }
@@ -73,13 +74,17 @@ private extension CalcViewController {
     }
     
     func tapEqual() {
-        let result = calculator.compute(elements: elements)
-        
-        switch result {
-        case .failure(let error):
-            presentErrorAlert(with: error.title, and: error.message)
-        case .success(let success):
-            textView.text.append(" = \(success)")
+        if expressionHaveResult {
+            textView.text = calculator.reset()
+        } else {
+            let result = calculator.compute(elements: elements)
+            
+            switch result {
+            case .failure(let error):
+                presentErrorAlert(with: error.title, and: error.message)
+            case .success(let success):
+                textView.text.append(" = \(success)")
+            }
         }
     }
     
@@ -90,5 +95,9 @@ private extension CalcViewController {
             presentErrorAlert(with: CalcError.moreThanOneOperator.title, and: CalcError.moreThanOneOperator.message)
         }
     }
+}
+
+extension CalcViewController: UITextViewDelegate {
+    
 }
 

@@ -11,7 +11,7 @@ enum Operands {
     case substraction
     case multiplication
     case division
-    case compute
+
     
     var symbol: String {
         switch self {
@@ -23,8 +23,6 @@ enum Operands {
             return "x"
         case .division:
             return "÷"
-        case .compute:
-            return "="
         }
     }
 }

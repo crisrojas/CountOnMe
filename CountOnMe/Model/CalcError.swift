@@ -11,8 +11,7 @@ enum CalcError: Error {
     case incorrectExpression
     case notEnoughElements
     case moreThanOneOperator
-    case unknownOperator
-    case unknownError
+    case inconvertibleString
     
     
     var title: String {
@@ -23,10 +22,8 @@ enum CalcError: Error {
             return "L'expression n'a pas assez d'éléments"
         case .moreThanOneOperator:
             return "Ce n'est pas possible d'ajouter un nouveau operateur"
-        case .unknownOperator:
-            return "Operateur inconnu"
-        case .unknownError:
-            return "Error inconnu"
+        case .inconvertibleString:
+            return "Impossible de convetir"
         }
     }
     
@@ -38,10 +35,9 @@ enum CalcError: Error {
             return "Démarrez un nouveau calcul!"
         case .moreThanOneOperator:
             return "Un operateur est déja mis!"
-        case .unknownOperator:
-            return "L'operateur est inconnu!"
-        case .unknownError:
-            return "Il s'est produit un erreur inconnu"
+        case .inconvertibleString:
+            return "Il n'est pas possible de convertir le string en float"
         }
     }
 }
+
